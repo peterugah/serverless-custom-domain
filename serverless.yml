@@ -9,10 +9,10 @@ provider:
   memorySize: 512
   apiName: ${self:custom.name}-${self:provider.stage}-api
   # replace with your own aws profile name
-  profile: <profile_name>
+  profile: peter-ugah-futurex
   # this section is optional
   deploymentBucket:
-    name: <deployment_bucket>
+    name: futurex-artifacts
   deploymentPrefix: ${self:custom.name}
 functions:
   test:
