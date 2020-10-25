@@ -5,6 +5,7 @@ provider:
   runtime: nodejs12.x
   region: eu-west-2
   stage: dev
+  versionFunctions: false
   timeout: 30
   memorySize: 512
   apiName: ${self:custom.name}-${self:provider.stage}-api
@@ -29,9 +30,9 @@ custom:
   name: custom-domain-test
   basename: futurexeducation.com
   customDomain:
-    domainName: ${self:provider.stage}.api.futurexeducation.com
+    domainName: ${self:provider.stage}.api.${self:custom.basename}
     stage: ${self:provider.stage}
-    certificateName: ${self:provider.stage}.api.futurexeducation.com
+    certificateName: ${self:provider.stage}.api.${self:custom.basename}
     createRoute53Record: true
     endpointType: "edge"
     securityPolicy: tls_1_2
