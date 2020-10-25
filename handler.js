@@ -5,7 +5,7 @@ module.exports.hello = async (event, ctx) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'i needed to update this',
+        message: 'working as intended',
         ctx
       },
       null,
