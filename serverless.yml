@@ -1,0 +1,39 @@
+service: ${self:custom.name}
+frameworkVersion: "2"
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-2
+  stage: dev
+  timeout: 30
+  memorySize: 512
+  apiName: ${self:custom.name}-${self:provider.stage}-api
+  # replace with your own aws profile name
+  profile: <profile_name>
+  # this section is optional
+  deploymentBucket:
+    name: <deployment_bucket>
+  deploymentPrefix: ${self:custom.name}
+functions:
+  test:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+plugins:
+  - serverless-domain-manager
+
+custom:
+  name: custom-domain-test
+  basename: futurexeducation.com
+  customDomain:
+    domainName: ${self:provider.stage}.api.futurexeducation.com
+    stage: ${self:provider.stage}
+    certificateName: ${self:provider.stage}.api.futurexeducation.com
+    createRoute53Record: true
+    endpointType: "edge"
+    securityPolicy: tls_1_2
+    apiType: rest
+    autoDomain: true
